@@ -6,8 +6,8 @@ class AddTask extends Component {
 
   minDate = new Date().toISOString().slice(0, 10);
   state = {
-    text: "",
-    checkbox: false,
+    text: '',
+    checked: false,
     date: this.minDate,
   }
 
@@ -18,7 +18,7 @@ class AddTask extends Component {
   }
   handleCheckbox = (e) => {
     this.setState({
-      checked: e.target.value
+      checked: e.target.checked
     })
   }
 
@@ -29,9 +29,21 @@ class AddTask extends Component {
   }
 
   handleClick = () => {
-    this.setState({
+    console.log("dodaj");
 
-    })
+    const { text, checked, date } = this.state;
+    if (text.length > 2) {
+      const add = this.props.add(text, date, checked);
+      if (add) {
+        this.setState({
+          text: '',
+          checked: false,
+          date: this.minDate
+        })
+      }
+    } else {
+      console.log("za krótko");
+    }
   }
   render() {
     let maxDate = this.minDate.slice(0, 4) * 1 + 1;

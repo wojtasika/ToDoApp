@@ -5,13 +5,15 @@ import './App.css';
 
 class App extends Component {
 
+  counter = 9
+
   state = {
     tasks: [
       {
         id: 0,
         text: 'zagrać w coś tam',
         date: '2019-02-15',
-        important: false,
+        important: true,
         active: true,
         finishDate: null
       },
@@ -35,7 +37,7 @@ class App extends Component {
         id: 3,
         text: 'zrób zakupy',
         date: '2019-12-31',
-        important: false,
+        important: true,
         active: true,
         finishDate: null
       },
@@ -65,7 +67,7 @@ class App extends Component {
       },
       {
         id: 7,
-        text: 'zrób zakupy',
+        text: 'fryzjer',
         date: '2019-12-31',
         important: false,
         active: true,
@@ -115,6 +117,25 @@ class App extends Component {
     this.setState({
       tasks
     })
+  }
+
+  addTask = (text, date, important) => {
+    // console.log("dodaj obiekt");
+    const task = {
+      id: this.counter,
+      text, //tekst z inputa
+      date, //data z inputa
+      important, //wartość z inputa
+      active: true,
+      finishDate: null
+    }
+    this.counter++
+    console.log(task, this.counter);
+
+    this.setState(prevState => ({
+      tasks: [...prevState.tasks, task]
+    }))
+    return true
   }
 
   render() {
